@@ -9,9 +9,14 @@ export default function App() {
   const addGoal = (text) => {
     setGoals((prev) => [
       ...prev,
-      { text: text, key: Math.random().toString() },
+      { text: text, id: Math.random().toString() },
     ]);
   };
+
+  const onDeleteItem = (id) => {
+    const newGoals = goals.filter((goal) => goal.id !== id )
+    setGoals(newGoals)
+  }
 
   return (
     <View style={styles.container}>
@@ -20,8 +25,8 @@ export default function App() {
         <View style={styles.goalsContainer}>
           <FlatList
             data={goals}
-            renderItem={({ item }) => <GoalItem item={item.text} />}
-            keyExtractor={(item) => item.key}
+            renderItem={( {item} ) => <GoalItem item={item} onDeleteItem={onDeleteItem}/>}
+            keyExtractor={(item) => item.id}
           />
         </View>
       ) : (
