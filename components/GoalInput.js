@@ -8,8 +8,10 @@ export const GoalInput = ({ addGoal }) => {
   };
 
   const handleAddGoal = () => {
-    addGoal(text);
-    setText("");
+    if (text.length > 0) {
+        addGoal(text);
+    }
+    setText('')
   };
 
   return (
@@ -18,6 +20,7 @@ export const GoalInput = ({ addGoal }) => {
         placeholder="Enter your goals for this year!"
         style={styles.textInput}
         onChangeText={handleTextChange}
+        value={text}
       />
       <Button title="Add Goal" onPress={handleAddGoal} />
     </View>
