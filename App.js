@@ -5,35 +5,43 @@ import { GoalItem } from "./components/GoalItem";
 
 export default function App() {
   const [goals, setGoals] = useState([]);
-  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const addGoal = (text) => {
-    setGoals((prev) => [
-      ...prev,
-      { text: text, id: Math.random().toString() },
-    ]);
+    setGoals((prev) => [...prev, { text: text, id: Math.random().toString() }]);
+    closeModal();
   };
 
   const onDeleteItem = (id) => {
-    const newGoals = goals.filter((goal) => goal.id !== id )
-    setGoals(newGoals)
-  }
+    const newGoals = goals.filter((goal) => goal.id !== id);
+    setGoals(newGoals);
+  };
 
   const showModal = () => {
-    setIsModalVisible(true)
-  }
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <View style={styles.container}>
-      <Button title="Add new goal" onPress={showModal}/>
-      {
-        isModalVisible && <GoalInput visible={isModalVisible} addGoal={addGoal} />
-      }
+      <Button title="Add new goal" onPress={showModal} />
+      {isModalVisible && (
+        <GoalInput
+          visible={isModalVisible}
+          addGoal={addGoal}
+          closeModal={closeModal}
+        />
+      )}
       {goals.length > 0 ? (
         <View style={styles.goalsContainer}>
           <FlatList
             data={goals}
-            renderItem={( {item} ) => <GoalItem item={item} onDeleteItem={onDeleteItem}/>}
+            renderItem={({ item }) => (
+              <GoalItem item={item} onDeleteItem={onDeleteItem} />
+            )}
             keyExtractor={(item) => item.id}
           />
         </View>
