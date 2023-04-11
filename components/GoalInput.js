@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, StyleSheet, TextInput, View, Modal } from "react-native";
 
-export const GoalInput = ({ addGoal }) => {
+export const GoalInput = ({ addGoal, isModalOpen }) => {
   const [text, setText] = useState("");
   const handleTextChange = (textInput) => {
     setText(textInput);
@@ -15,7 +15,7 @@ export const GoalInput = ({ addGoal }) => {
   };
 
   return (
-    <Modal>
+    <Modal visible={isModalOpen} animationType="fade">
     <View style={styles.inpuContainer}>
       <TextInput
         placeholder="Enter your goals for this year!"
