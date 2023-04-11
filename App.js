@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button, FlatList, StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { GoalInput } from "./components/GoalInput";
 import { GoalItem } from "./components/GoalItem";
 
@@ -27,7 +28,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Button title="Add new goal" onPress={showModal} />
+         <View style={styles.goalsContainer}>
+          <Text style={{fontWeight: 'bold', color: 'white', fontSize: 20}}>Start your journey!</Text>
+          <Text style={{fontWeight: 'bold', color: 'white', fontSize: 20, marginBottom: 40}}>Add new goals.</Text>
       {isModalVisible && (
         <GoalInput
           visible={isModalVisible}
@@ -35,7 +38,7 @@ export default function App() {
           closeModal={closeModal}
         />
       )}
-      {goals.length > 0 ? (
+      {goals.length > 0 && (
         <View style={styles.goalsContainer}>
           <FlatList
             data={goals}
@@ -45,11 +48,14 @@ export default function App() {
             keyExtractor={(item) => item.id}
           />
         </View>
-      ) : (
-        <View style={styles.goalsContainer}>
-          <Text>Start your journey!</Text>
+      )
+      }
         </View>
-      )}
+        <View style={styles.addBtn}>
+          <Pressable onPress={showModal}>
+          <Ionicons name="add-circle-outline" size={80} color="#e63946" />
+          </Pressable>
+          </View>
     </View>
   );
 }
@@ -60,18 +66,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 50,
     paddingHorizontal: 16,
-  },
-  inpuContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
+    backgroundColor: '#2b2d42'
   },
   goalsContainer: {
     flex: 5,
+    alignItems: 'center'
   },
   goalItem: {
     padding: 8,
@@ -82,4 +81,9 @@ const styles = StyleSheet.create({
   goalText: {
     color: "white",
   },
+  addBtn: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10
+  }
 });

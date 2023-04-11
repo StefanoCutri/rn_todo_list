@@ -8,9 +8,9 @@ export const GoalItem = ({ item, onDeleteItem }) => {
       <Pressable
         android_ripple={{ color: "white" }}
         onPress={() => onDeleteItem(item.id)}
-        style={({pressed}) =>  pressed && styles.pressedItem}
+        style={({ pressed }) => pressed && styles.pressedItem}
       >
-        <Text style={styles.goalText}>{item.text}</Text>
+        <Text style={styles.goalText}>· {item.text}</Text>
       </Pressable>
     </View>
   );
@@ -19,14 +19,15 @@ export const GoalItem = ({ item, onDeleteItem }) => {
 const styles = StyleSheet.create({
   goalItem: {
     margin: 6,
-    backgroundColor: "black",
     borderRadius: 6,
+    justifyContent: "flex-start",
   },
   pressedItem: {
-    opacity: 0.5
+    opacity: 0.5,
   },
   goalText: {
     padding: 8,
     color: "white",
+    fontSize: 18,
   },
 });

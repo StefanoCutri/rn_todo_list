@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, StyleSheet, TextInput, View, Modal } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  TextInput,
+  View,
+  Modal,
+  Image,
+} from "react-native";
 
 export const GoalInput = ({ addGoal, isModalOpen, closeModal }) => {
   const [text, setText] = useState("");
@@ -17,18 +24,26 @@ export const GoalInput = ({ addGoal, isModalOpen, closeModal }) => {
   return (
     <Modal visible={isModalOpen} animationType="fade">
       <View style={styles.inpuContainer}>
+        <Image
+          source={require("../assets/images/goal.png")}
+          style={styles.image}
+        />
         <TextInput
           placeholder="Enter your goals for this year!"
           style={styles.textInput}
           onChangeText={handleTextChange}
           value={text}
         />
-        <View style={{ flexDirection: "row", justifyContent: 'center' }}>
+        <View style={{ flexDirection: "row", justifyContent: "center" }}>
           <View style={styles.button}>
-            <Button title="Add Goal" onPress={handleAddGoal} />
+            <Button
+              title="Add Goal"
+              onPress={handleAddGoal}
+              color={"#e63946"}
+            />
           </View>
           <View style={styles.button}>
-            <Button title="Cancel" onPress={closeModal}/>
+            <Button title="Cancel" onPress={closeModal} color={"#e63946"} />
           </View>
         </View>
       </View>
@@ -42,9 +57,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
     borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
+    backgroundColor: "black",
   },
   textInput: {
     borderWidth: 1,
@@ -52,6 +66,12 @@ const styles = StyleSheet.create({
     width: "85%",
     marginRight: 8,
     padding: 8,
+    color: "white",
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20,
   },
   button: {
     width: 100,
