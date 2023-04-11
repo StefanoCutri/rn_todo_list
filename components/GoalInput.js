@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { Button, StyleSheet, TextInput, View, Modal } from "react-native";
 
 export const GoalInput = ({ addGoal }) => {
   const [text, setText] = useState("");
@@ -15,6 +15,7 @@ export const GoalInput = ({ addGoal }) => {
   };
 
   return (
+    <Modal>
     <View style={styles.inpuContainer}>
       <TextInput
         placeholder="Enter your goals for this year!"
@@ -24,6 +25,7 @@ export const GoalInput = ({ addGoal }) => {
       />
       <Button title="Add Goal" onPress={handleAddGoal} />
     </View>
+    </Modal>
   );
 };
 
